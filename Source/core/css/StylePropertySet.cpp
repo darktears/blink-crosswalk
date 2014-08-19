@@ -25,6 +25,8 @@
 
 #include "core/StylePropertyShorthand.h"
 #include "core/css/parser/BisonCSSParser.h"
+#include "core/css/CSSMatrix.h"
+#include "core/css/CSSTransformValue.h"
 #include "core/css/CSSValuePool.h"
 #include "core/css/RuntimeCSSEnabled.h"
 #include "core/css/StylePropertySerializer.h"
@@ -266,6 +268,12 @@ bool MutableStylePropertySet::setProperty(CSSPropertyID propertyID, const String
     // When replacing an existing property value, this moves the property to the end of the list.
     // Firefox preserves the position, and MSIE moves the property to the beginning.
     return BisonCSSParser::parseValue(this, propertyID, value, important, cssParserMode(), contextStyleSheet);
+}
+
+bool MutableStylePropertySet::setPropertyMatrix(CSSPropertyID propertyID, const CSSMatrix* matrix, bool important, StyleSheetContents* contextStyleSheet)
+{
+    addParsedProperty(CSSProperty(propertyID, matrix->m_value, important));
+    return true;
 }
 
 void MutableStylePropertySet::setProperty(CSSPropertyID propertyID, PassRefPtrWillBeRawPtr<CSSValue> prpValue, bool important)

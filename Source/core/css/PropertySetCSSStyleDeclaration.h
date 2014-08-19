@@ -57,12 +57,14 @@ private:
     virtual String getPropertyShorthand(const String& propertyName) OVERRIDE FINAL;
     virtual bool isPropertyImplicit(const String& propertyName) OVERRIDE FINAL;
     virtual void setProperty(const String& propertyName, const String& value, const String& priority, ExceptionState&) OVERRIDE FINAL;
+    virtual void setPropertyMatrix(const String& propertyName, CSSMatrix* matrix, const String& priority, ExceptionState&) OVERRIDE FINAL;
     virtual String removeProperty(const String& propertyName, ExceptionState&) OVERRIDE FINAL;
     virtual String cssText() const OVERRIDE FINAL;
     virtual void setCSSText(const String&, ExceptionState&) OVERRIDE FINAL;
     virtual PassRefPtrWillBeRawPtr<CSSValue> getPropertyCSSValueInternal(CSSPropertyID) OVERRIDE FINAL;
     virtual String getPropertyValueInternal(CSSPropertyID) OVERRIDE FINAL;
     virtual void setPropertyInternal(CSSPropertyID, const String& value, bool important, ExceptionState&) OVERRIDE FINAL;
+    virtual void setPropertyInternalMatrix(CSSPropertyID, CSSMatrix* matrix, bool important, ExceptionState&) OVERRIDE FINAL;
 
     virtual bool cssPropertyMatches(CSSPropertyID, const CSSValue*) const OVERRIDE FINAL;
     virtual PassRefPtrWillBeRawPtr<MutableStylePropertySet> copyProperties() const OVERRIDE FINAL;

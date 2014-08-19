@@ -228,6 +228,19 @@ void AbstractPropertySetCSSStyleDeclaration::setProperty(const String& propertyN
     setPropertyInternal(propertyID, value, important, exceptionState);
 }
 
+void AbstractPropertySetCSSStyleDeclaration::setPropertyMatrix(const String& propertyName, CSSMatrix* matrix, const String& priority, ExceptionState& exceptionState)
+{
+    CSSPropertyID propertyID = cssPropertyID(propertyName);
+    if (!propertyID)
+        return;
+
+    bool important = equalIgnoringCase(priority, "important");
+    if (!important && !priority.isEmpty())
+        return;
+
+    setPropertyInternalMatrix(propertyID, matrix, important, exceptionState);
+}
+
 String AbstractPropertySetCSSStyleDeclaration::removeProperty(const String& propertyName, ExceptionState& exceptionState)
 {
     StyleAttributeMutationScope mutationScope(this);
@@ -263,6 +276,19 @@ void AbstractPropertySetCSSStyleDeclaration::setPropertyInternal(CSSPropertyID p
     willMutate();
 
     bool changed = propertySet().setProperty(propertyID, value, important, contextStyleSheet());
+
+    didMutate(changed ? PropertyChanged : NoChanges);
+
+    if (changed)
+        mutationScope.enqueueMutationRecord();
+}
+
+void AbstractPropertySetCSSStyleDeclaration::setPropertyInternalMatrix(CSSPropertyID propertyID, CSSMatrix* matrix, bool important, ExceptionState&)
+{
+    StyleAttributeMutationScope mutationScope(this);
+    willMutate();
+
+    bool changed = propertySet().setPropertyMatrix(propertyID, matrix, important, contextStyleSheet());
 
     didMutate(changed ? PropertyChanged : NoChanges);
 

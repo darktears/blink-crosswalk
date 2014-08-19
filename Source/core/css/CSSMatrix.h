@@ -149,6 +149,7 @@ public:
 
     void trace(Visitor*) { }
 
+    RefPtrWillBeRawPtr<CSSValue> m_value;
 protected:
     CSSMatrix(const TransformationMatrix&);
     CSSMatrix(const String&, ExceptionState&);

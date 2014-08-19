@@ -31,6 +31,9 @@
      [RaisesException] void setProperty([Default=Undefined] optional DOMString propertyName,
                                     [TreatNullAs=NullString,Default=Undefined] optional DOMString value,
                                     [TreatNullAs=NullString] optional DOMString priority = null);
+    [RaisesException] void setPropertyMatrix([Default=Undefined] optional DOMString propertyName,
+                                    [Default=Undefined] optional WebKitCSSMatrix value,
+                                    [TreatNullAs=NullString] optional DOMString priority = null);
 
     readonly attribute unsigned long    length;
     getter DOMString          item([Default=Undefined] optional unsigned long index);

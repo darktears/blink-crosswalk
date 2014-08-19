@@ -31,6 +31,7 @@
 
 namespace WebCore {
 
+class CSSMatrix;
 class CSSPrimitiveValue;
 class CSSValueList;
 class ExceptionState;
@@ -95,12 +96,14 @@ private:
     virtual String getPropertyShorthand(const String& propertyName) OVERRIDE;
     virtual bool isPropertyImplicit(const String& propertyName) OVERRIDE;
     virtual void setProperty(const String& propertyName, const String& value, const String& priority, ExceptionState&) OVERRIDE;
+    virtual void setPropertyMatrix(const String& propertyName, CSSMatrix* matrix, const String& priority, ExceptionState&) OVERRIDE;
     virtual String removeProperty(const String& propertyName, ExceptionState&) OVERRIDE;
     virtual String cssText() const OVERRIDE;
     virtual void setCSSText(const String&, ExceptionState&) OVERRIDE;
     virtual PassRefPtrWillBeRawPtr<CSSValue> getPropertyCSSValueInternal(CSSPropertyID) OVERRIDE;
     virtual String getPropertyValueInternal(CSSPropertyID) OVERRIDE;
     virtual void setPropertyInternal(CSSPropertyID, const String& value, bool important, ExceptionState&) OVERRIDE;
+    virtual void setPropertyInternalMatrix(CSSPropertyID, CSSMatrix* matrix, bool important, ExceptionState&) OVERRIDE;
 
     virtual bool cssPropertyMatches(CSSPropertyID, const CSSValue*) const OVERRIDE;
 

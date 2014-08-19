@@ -3027,6 +3027,11 @@ void CSSComputedStyleDeclaration::setProperty(const String& name, const String&,
     exceptionState.throwDOMException(NoModificationAllowedError, "These styles are computed, and therefore the '" + name + "' property is read-only.");
 }
 
+void CSSComputedStyleDeclaration::setPropertyMatrix(const String& name, CSSMatrix* matrix, const String&, ExceptionState& exceptionState)
+{
+    exceptionState.throwDOMException(NoModificationAllowedError, "These styles are computed, and therefore the '" + name + "' property is read-only.");
+}
+
 String CSSComputedStyleDeclaration::removeProperty(const String& name, ExceptionState& exceptionState)
 {
     exceptionState.throwDOMException(NoModificationAllowedError, "These styles are computed, and therefore the '" + name + "' property is read-only.");
@@ -3044,6 +3049,11 @@ String CSSComputedStyleDeclaration::getPropertyValueInternal(CSSPropertyID prope
 }
 
 void CSSComputedStyleDeclaration::setPropertyInternal(CSSPropertyID id, const String&, bool, ExceptionState& exceptionState)
+{
+    exceptionState.throwDOMException(NoModificationAllowedError, "These styles are computed, and therefore the '" + getPropertyNameString(id) + "' property is read-only.");
+}
+
+void CSSComputedStyleDeclaration::setPropertyInternalMatrix(CSSPropertyID id, CSSMatrix*, bool, ExceptionState& exceptionState)
 {
     exceptionState.throwDOMException(NoModificationAllowedError, "These styles are computed, and therefore the '" + getPropertyNameString(id) + "' property is read-only.");
 }

@@ -41,7 +41,8 @@
 namespace WebCore {
 
 CSSMatrix::CSSMatrix(const TransformationMatrix& m)
-    : m_matrix(m)
+    : m_value(nullptr)
+    , m_matrix(m)
 {
     ScriptWrappable::init(this);
 }
@@ -68,6 +69,7 @@ void CSSMatrix::setMatrixValue(const String& string, ExceptionState& exceptionSt
         if (!value || (value->isPrimitiveValue() && (toCSSPrimitiveValue(value.get()))->getValueID() == CSSValueNone))
             return;
 
+        m_value = value;
         DEFINE_STATIC_REF(RenderStyle, defaultStyle, RenderStyle::createDefaultStyle());
         TransformOperations operations;
         if (!TransformBuilder::createTransformOperations(value.get(), CSSToLengthConversionData(defaultStyle, defaultStyle, 0, 0, 1.0f), operations)) {

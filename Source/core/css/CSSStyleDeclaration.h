@@ -28,6 +28,7 @@
 
 namespace WebCore {
 
+class CSSMatrix;
 class CSSProperty;
 class CSSRule;
 class CSSStyleSheet;
@@ -56,6 +57,7 @@ public:
     virtual String getPropertyShorthand(const String& propertyName) = 0;
     virtual bool isPropertyImplicit(const String& propertyName) = 0;
     virtual void setProperty(const String& propertyName, const String& value, const String& priority, ExceptionState&) = 0;
+    virtual void setPropertyMatrix(const String& propertyName, CSSMatrix* matrix, const String& priority, ExceptionState&) = 0;
     virtual String removeProperty(const String& propertyName, ExceptionState&) = 0;
 
     // CSSPropertyID versions of the CSSOM functions to support bindings and editing.
@@ -64,6 +66,7 @@ public:
     virtual PassRefPtrWillBeRawPtr<CSSValue> getPropertyCSSValueInternal(CSSPropertyID) = 0;
     virtual String getPropertyValueInternal(CSSPropertyID) = 0;
     virtual void setPropertyInternal(CSSPropertyID, const String& value, bool important, ExceptionState&) = 0;
+    virtual void setPropertyInternalMatrix(CSSPropertyID, CSSMatrix* matrix, bool important, ExceptionState&) = 0;
 
     virtual PassRefPtrWillBeRawPtr<MutableStylePropertySet> copyProperties() const = 0;
 
